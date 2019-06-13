@@ -506,18 +506,18 @@ Function rollingSim(baseStr As String, searchStr As String) As Double
     'a crucial condition here is that the base string must be larger than the search string. 
 	'if we do not satisfy it, we revert back to the regular similarity function.
     If Len(searchStr) >= Len(baseStr) Then
-        rollingSim = Utils.Similarity(searchStr, baseStr)
+        rollingSim = Similarity(searchStr, baseStr)
         Exit Function
     End If
     
     'how long each mid-section of the base string is.
     rollLength = Len(searchStr)
-    'the closest levenshtein distance of all possible mid-sections
+    'the closest Soundex Distance
     bestSim = 0
     
     For i = 1 To Len(baseStr) - rollLength
         crossSection = Mid(baseStr, i, rollLength)
-        crossSim = Utils.Similarity(crossSection, searchStr)
+        crossSim = Similarity(crossSection, searchStr)
         If crossSim > bestSim Then
             bestSim = crossSim
         End If
