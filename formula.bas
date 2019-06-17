@@ -6,7 +6,8 @@ Function rollingSim(baseStr As String, searchStr As String) As Double
     Dim crossSection As String
     Dim crossSim As Double
     
-    'a crucial condition here is that the base string must be larger than the search string. if we do not satisfy it, we revert back to the regular similarity function.
+    'a crucial condition here is that the base string must be larger than the search string. 
+	'if we do not satisfy it, we revert back to the regular similarity function.
     If Len(searchStr) >= Len(baseStr) Then
         rollingSim = Utils.Similarity(searchStr, baseStr)
         Exit Function
@@ -17,7 +18,7 @@ Function rollingSim(baseStr As String, searchStr As String) As Double
     'the closest levenshtein distance of all possible mid-sections
     bestSim = 0
     
-    For i = 1 To Len(baseStr) - rollLength
+    For i = 1 To Len(baseStr) - rollLength + 1 '+1 to offset the possibility of two strings being the same.
         crossSection = Mid(baseStr, i, rollLength)
         crossSim = Utils.Similarity(crossSection, searchStr)
         If crossSim > bestSim Then
